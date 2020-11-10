@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html onclick="jump()">
+<head>
+<style>
+#game{
+height:600px;
+width:1508px;
+margin-left:-7px;
+margin-top:-7px;
+border:5px solid black;
+background-image:url("pm.jpg");
+background-repeat: no-repeat;
+}
+#char{
+height:200px;
+width:200px;
+position:relative;
+border-radius:20px;
+background-image:url("https://i.gifer.com/origin/c2/c2247d10cddc455ea6d676a9969fee49_w200.gif");
+top:400px;
+left:10px;
+}
+.animate{
+animation:jump 600ms infinite;
+}
+#obst{
+height:60px;
+width:80px;
+background-image:url("im.jpg");
+position:relative;
+border-radius:100px;
+top:340px;
+left:1155px;
+animation:obst 1s infinite linear;
+}
+@keyframes obst{
+0%{
+left:1506px;
+}
+100%{
+left:-60px;
+}}
+@keyframes jump{
+0%{
+top:400px;
+}
+60%{
+top:180px;
+}
+100%{
+top:400px;
+}
+}
+#content{
+width:100%;
+height:135px;
+background-color:pink;
+border:2px solid black;
+margin-left:-7px;
+padding-right:10px;
+}
+#content p{
+font-size:17px;
+font-weight:bold;
+text-align:center;
+}
+button{
+margin-left:720px;
+padding:10px;
+border:3px solid black;
+border-radius:10px;
+color:#e279f2;
+font-weight:bold;
+background-color:#b8f2e9;
+}
+#loose{
+height:130px;
+width:300px;
+border-radius:10px;
+font-weight:bold;
+font-size:17px;
+color:red;
+text-align:center;
+position:fixed;
+margin-left:607px;
+margin-top:165px;
+}
+</style>
+</head>
+<body>
+<div id="game">
+<div id="char">
+</div>
+<div id="obst">
+</div>
+<div id="loose">
+</div>
+</div>
+<div id="content">
+<u><p>Welcome To Jump Game Click to Start the Game !!!</p></u>
+<p id="score"></p>
+<button type="button" onClick="refreshPage()">Restart</button>
+</div>
+<script>
+var count=0;
+var obst=document.getElementById("obst");
+var charc=document.getElementById("char");
+
+function jump(){
+if (char.classList!="animate"){
+charc.classList.add("animate");
+count++;
+}
+setTimeout(function(){
+charc.classList.remove("animate");
+},500);          
+}
+var check=setInterval(function(){
+var ctop=parseInt(window.getComputedStyle(charc).getPropertyValue("top"));
+var otop=parseInt(window.getComputedStyle(obst).getPropertyValue("left"));
+if(otop<20 && otop>0 && ctop>=400){
+obst.style.animation="none";
+char.style.display="none";
+obst.style.display="none";
+document.getElementById("loose").innerHTML="You Got Traped By Virus";
+document.getElementById("loose").innerHTML="OOPS You are Traped by the Virus!<br>Try Again!!";
+document.getElementById("score").innerHTML="YOUR SCORE IS : "+count;
+}
+},10);
+
+function refreshPage(){
+    window.location.reload();
+} 
+</script>
+</body>
+</html>
